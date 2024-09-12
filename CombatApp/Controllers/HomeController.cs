@@ -1,6 +1,5 @@
 using CombatApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CombatApp.Controllers
 {
@@ -28,7 +27,7 @@ namespace CombatApp.Controllers
             Enemy.Defense = Protag.Level;
 
             ViewBag.Win = (Protag.Combat(Enemy) == 0);
-            System.Console.WriteLine(Protag.Level);
+
             return View(Protag);
         }
     }
