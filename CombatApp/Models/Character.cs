@@ -27,12 +27,7 @@ namespace CombatApp.Models
                 enemy.HP -= this.Attack;
             }
 
-            if(enemy.HP <= 0)
-            {
-                return 0;
-            }
-
-            return 1;
+            return (this.HP <= 0 ? 1 : 0);
         }
     }
 }
