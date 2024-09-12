@@ -49,12 +49,12 @@
 </script>
 <p>The result is: you @(ViewBag.Win ? "win" : "lose")</p>
 <form asp-action="Index" method="post">
-    <br>HP: <input asp-for="HP" disabled />
+    <br>HP: <input asp-for="HP" readonly />
     <br>Attack: <input asp-for="Attack" />
     <br>Defense: <input asp-for="Defense" />
     <br>Magic: <input asp-for="Magic" />
-    <br>Skill Points: <input asp-for="SkillPoints" value="@Model.SkillPoints" disabled />
-    <br>Level: <input asp-for="Level" value="@Model.Level" disabled />
+    <br>Skill Points: <input asp-for="SkillPoints" value="@Model.SkillPoints" readonly />
+    <br>Level: <input asp-for="Level" value="@Model.Level" readonly />
     <br>Name: <input asp-for="Name" />
     @if(ViewBag.Win)
     {
