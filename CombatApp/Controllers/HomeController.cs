@@ -23,17 +23,12 @@ namespace CombatApp.Controllers
             Protag.Level += 1;
 
             var Enemy = new Character();
-            Enemy.HP = 99;
-            Enemy.Attack = 99;
-            Enemy.Defense = 99;
-            if (Protag.Combat(Enemy) == 0)
-            {
-                ViewBag.Win = true;
-            }
-            else
-            {
-                ViewBag.Win = false;
-            }
+            Enemy.HP = Protag.Level;
+            Enemy.Attack = Protag.Level;
+            Enemy.Defense = Protag.Level;
+
+            ViewBag.Win = (Protag.Combat(Enemy) == 0);
+            System.Console.WriteLine(Protag.Level);
             return View(Protag);
         }
     }

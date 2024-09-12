@@ -7,15 +7,54 @@
     //event listener for every input
         //when the inputs change, add/subtract from the skill points
         //
+    document.addEventListener("DOMContentLoaded", () => {
+        form = document.querySelector("form");
+        attack = document.querySelector("#Attack");
+        defense = document.querySelector("#Defense");
+        magic = document.querySelector("#Magic");
+        skill_points = document.querySelector("#SkillPoints");
+        sum = skill_points.value;
+        skill_points.value = sum - attack.value - defense.value - magic.value;
+
+        form.addEventListener("formdata", (event) => {
+            event.formData.set("SkillPoints", sum);
+        });
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (attack.value < 0 || defense.value < 0 || magic.value < 0) {
+                window.alert("You can't specify negative stats.");
+            } else if (skill_points.value < 0) {
+                window.alert("You don't have enough skill points.");
+            } else {
+                form.submit();
+            }
+        })
+
+        attack.addEventListener("input", () => {
+            temp = (isNaN(attack.value) ? 0 : attack.value);
+            skill_points.value = sum - temp - defense.value - magic.value;
+        });
+
+        defense.addEventListener("input", () => {
+            temp = (isNaN(defense.value) ? 0 : defense.value);
+            skill_points.value = sum - attack.value - temp - magic.value;
+        });
+
+        magic.addEventListener("input", () => {
+            temp = (isNaN(magic.value) ? 0 : magic.value);
+            skill_points.value = sum - attack.value - defense.value - temp;
+        });
+    });
 </script>
-<p>The result is: you @ViewBag.Win</p>
+<p>The result is: you @(ViewBag.Win ? "win" : "lose")</p>
 <form asp-action="Index" method="post">
-    <br>HP: <input asp-for="HP" />
+    <br>HP: <input asp-for="HP" disabled />
     <br>Attack: <input asp-for="Attack" />
     <br>Defense: <input asp-for="Defense" />
     <br>Magic: <input asp-for="Magic" />
-    <br>Skill Points: <input asp-for="SkillPoints" value="@Model.SkillPoints" />
-    <br>Level: <input asp-for="Level" value="@Model.Level" />
+    <br>Skill Points: <input asp-for="SkillPoints" value="@Model.SkillPoints" disabled />
+    <br>Level: <input asp-for="Level" value="@Model.Level" disabled />
     <br>Name: <input asp-for="Name" />
     @if(ViewBag.Win)
     {
