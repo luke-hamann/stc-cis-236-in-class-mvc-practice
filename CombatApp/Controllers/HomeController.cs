@@ -18,15 +18,18 @@ namespace CombatApp.Controllers
         [HttpPost]
         public IActionResult Index(Character Protag)
         {
-            Protag.SkillPoints += 1;
-            Protag.Level += 1;
-
             var Enemy = new Character();
             Enemy.HP = Protag.Level;
             Enemy.Attack = Protag.Level;
             Enemy.Defense = Protag.Level;
 
             ViewBag.Win = (Protag.Combat(Enemy) == 0);
+
+            if (ViewBag.Win)
+            {
+                Protag.SkillPoints += 1;
+                Protag.Level += 1;
+            }
 
             return View(Protag);
         }
