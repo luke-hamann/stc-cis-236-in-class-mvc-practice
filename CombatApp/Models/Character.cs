@@ -6,16 +6,22 @@ namespace CombatApp.Models
     {
         [Required]
         public int HP { get; set; } = 10;
+
         [Required]
         public string Name { get; set; } = "Default";
+
         [Required]
         public int Attack { get; set; } = 1;
+
         [Required]
         public int Defense { get; set; } = 1;
+
         [Required]
         public int Magic { get; set; } = 1;
+
         [Required]
         public int SkillPoints { get; set; } = 0;
+
         [Required]
         public int Level { get; set; } = 1;
 
@@ -27,12 +33,7 @@ namespace CombatApp.Models
                 enemy.HP -= this.Attack;
             }
 
-            if(enemy.HP <= 0)
-            {
-                return 0;
-            }
-
-            return 1;
+            return (this.HP > 0 ? 0 : 1);
         }
     }
 }

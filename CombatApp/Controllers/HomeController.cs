@@ -1,6 +1,5 @@
 using CombatApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace CombatApp.Controllers
 {
@@ -19,21 +18,19 @@ namespace CombatApp.Controllers
         [HttpPost]
         public IActionResult Index(Character Protag)
         {
-            Protag.SkillPoints += 1;
-            Protag.Level += 1;
-
             var Enemy = new Character();
-            Enemy.HP = 99;
-            Enemy.Attack = 99;
-            Enemy.Defense = 99;
-            if (Protag.Combat(Enemy) == 0)
+            Enemy.HP = Protag.Level;
+            Enemy.Attack = Protag.Level;
+            Enemy.Defense = Protag.Level;
+
+            ViewBag.Win = (Protag.Combat(Enemy) == 0);
+
+            if (ViewBag.Win)
             {
-                ViewBag.Win = true;
+                Protag.SkillPoints += 1;
+                Protag.Level += 1;
             }
-            else
-            {
-                ViewBag.Win = false;
-            }
+
             return View(Protag);
         }
     }
